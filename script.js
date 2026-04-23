@@ -8,7 +8,7 @@ const unlockHint = document.getElementById("unlockHint");
 const recipeTitle = document.getElementById("recipeTitle");
 const recipeImage = document.getElementById("recipeImage");
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzfgrPwKyIKgVIOWv8p2iUwBOvpm05eyIRoSg3MQJve_2_ZBpmCTIPia8Z5cps38GinRg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwrybtjyINYEI_FnPnsprexN9rFuL7-CXA5t72EavltA0pxDDUQCXm5KigPa2t3uXnyyw/exec";
 
 const lessons = {
   "地瓜巴斯克蛋糕": {
@@ -68,6 +68,7 @@ feedbackForm.addEventListener("submit", async function (event) {
     lessonName: selectedLesson,
     memory: getCheckedValues("memory"),
     reminder: getSelectedValue("reminder"),
+    holdingBack: getSelectedValue("holdingBack"),
     takeaway: getCheckedValues("takeaway"),
     wish: getSelectedValue("wish"),
     rhythm: getSelectedValue("rhythm"),
