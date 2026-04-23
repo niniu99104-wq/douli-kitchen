@@ -1,33 +1,71 @@
 const feedbackForm = document.getElementById("feedbackForm");
+const lessonSelect = document.getElementById("lessonSelect");
 const unlockSection = document.getElementById("unlockSection");
 const recipeSection = document.getElementById("recipeSection");
 const unlockBtn = document.getElementById("unlockBtn");
 const recipeCodeInput = document.getElementById("recipeCode");
 const unlockHint = document.getElementById("unlockHint");
+const recipeTitle = document.getElementById("recipeTitle");
+const recipeImage = document.getElementById("recipeImage");
 
-const currentLesson = {
-  recipeCode: "草莓",
-  recipeTitle: "草莓小廚房｜課後食譜",
-  recipeImage: "images/strawberry-recipe.jpg",
-  recipeAlt: "草莓小廚房課後食譜",
+const API_URL = "https://script.google.com/macros/s/AKfycbzfgrPwKyIKgVIOWv8p2iUwBOvpm05eyIRoSg3MQJve_2_ZBpmCTIPia8Z5cps38GinRg/exec";
 
-  previewDate: "五月課程",
-  previewName: "蘋果花蛋糕＆母親節小卡",
-  previewDescription: "用柔柔的蘋果香氣，搭配孩子親手完成的小卡片，留下一份屬於這個季節的溫柔心意。"
+const lessons = {
+  "地瓜巴斯克蛋糕": {
+    recipeCode: "地瓜",
+    recipeTitle: "地瓜巴斯克蛋糕｜課後食譜",
+    recipeImage: "images/sweetpotato-basque-recipe.jpg",
+    recipeAlt: "地瓜巴斯克蛋糕課後食譜"
+  },
+  "聖誕薑餅屋": {
+    recipeCode: "薑餅",
+    recipeTitle: "聖誕薑餅屋｜課後食譜",
+    recipeImage: "images/christmas-gingerbread-recipe.jpg",
+    recipeAlt: "聖誕薑餅屋課後食譜"
+  },
+  "草莓小廚房（草莓瑪芬＋草莓牛奶）": {
+    recipeCode: "草莓",
+    recipeTitle: "草莓小廚房｜課後食譜",
+    recipeImage: "images/strawberry-recipe.jpg",
+    recipeAlt: "草莓小廚房課後食譜"
+  },
+  "蘋果派": {
+    recipeCode: "蘋果派",
+    recipeTitle: "蘋果派｜課後食譜",
+    recipeImage: "images/apple-pie-recipe.jpg",
+    recipeAlt: "蘋果派課後食譜"
+  },
+  "南瓜司康": {
+    recipeCode: "南瓜",
+    recipeTitle: "南瓜司康｜課後食譜",
+    recipeImage: "images/pumpkin-scone-recipe.jpg",
+    recipeAlt: "南瓜司康課後食譜"
+  },
+  "鳳梨巴斯克蛋糕": {
+    recipeCode: "鳳梨",
+    recipeTitle: "鳳梨巴斯克蛋糕｜課後食譜",
+    recipeImage: "images/pineapple-basque-recipe.jpg",
+    recipeAlt: "鳳梨巴斯克蛋糕課後食譜"
+  }
 };
 
-document.getElementById("recipeTitle").textContent = currentLesson.recipeTitle;
-document.getElementById("recipeImage").src = currentLesson.recipeImage;
-document.getElementById("recipeImage").alt = currentLesson.recipeAlt;
-
-document.getElementById("previewDate").textContent = currentLesson.previewDate;
-document.getElementById("previewName").textContent = currentLesson.previewName;
-document.getElementById("previewDescription").textContent = currentLesson.previewDescription;
-
-feedbackForm.addEventListener("submit", function (event) {
+feedbackForm.addEventListener("submit", async function (event) {
   event.preventDefault();
 
+  const selectedLesson = lessonSelect.value;
+
+  if (!selectedLesson) {
+    alert("請先選擇本次課程。");
+    lessonSelect.focus();
+    return;
+  }
+
+  const submitButton = feedbackForm.querySelector(".submit-btn");
+  submitButton.disabled = true;
+  submitButton.textContent = "送出中...";
+
   const formData = {
+    lessonName: selectedLesson,
     memory: getCheckedValues("memory"),
     reminder: getSelectedValue("reminder"),
     takeaway: getCheckedValues("takeaway"),
@@ -37,17 +75,46 @@ feedbackForm.addEventListener("submit", function (event) {
     submittedAt: new Date().toISOString()
   };
 
-  console.log("表單資料：", formData);
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8"
+      },
+      body: JSON.stringify(formData)
+    });
 
-  feedbackForm.classList.add("hidden");
-  unlockSection.classList.remove("hidden");
-  unlockSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    const result = await response.json();
+    console.log("寫入結果：", result);
+
+    const lessonData = lessons[selectedLesson];
+    recipeTitle.textContent = lessonData.recipeTitle;
+    recipeImage.src = lessonData.recipeImage;
+    recipeImage.alt = lessonData.recipeAlt;
+
+    feedbackForm.classList.add("hidden");
+    unlockSection.classList.remove("hidden");
+    unlockSection.scrollIntoView({ behavior: "smooth", block: "start" });
+  } catch (error) {
+    console.error("送出失敗：", error);
+    alert("送出失敗，請稍後再試一次。");
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "送出回饋";
+  }
 });
 
 unlockBtn.addEventListener("click", function () {
+  const selectedLesson = lessonSelect.value;
+  const lessonData = lessons[selectedLesson];
   const inputValue = recipeCodeInput.value.trim();
 
-  if (inputValue === currentLesson.recipeCode) {
+  if (!lessonData) {
+    unlockHint.textContent = "請先選擇課程。";
+    return;
+  }
+
+  if (inputValue === lessonData.recipeCode) {
     unlockHint.textContent = "";
     recipeSection.classList.remove("hidden");
     recipeSection.scrollIntoView({ behavior: "smooth", block: "start" });
