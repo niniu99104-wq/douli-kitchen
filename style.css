@@ -275,3 +275,7 @@ textarea::placeholder,
     flex: 1;
   }
 }
+
+.intro-teacher {
+  white-space: pre-line;
+}
