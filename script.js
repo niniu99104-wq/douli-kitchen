@@ -44,7 +44,7 @@ const lessons = {
   "鳳梨巴斯克蛋糕": {
     recipeCode: "鳳梨",
     recipeTitle: "鳳梨巴斯克蛋糕｜課後食譜",
-    recipeImage: "pineapple-basque-recipe.jpg",
+    recipeImage: "images/pineapple-basque-recipe.jpg",
     recipeAlt: "鳳梨巴斯克蛋糕課後食譜"
   }
 };
