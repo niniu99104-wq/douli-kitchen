@@ -8,43 +8,43 @@ const unlockHint = document.getElementById("unlockHint");
 const recipeTitle = document.getElementById("recipeTitle");
 const recipeImage = document.getElementById("recipeImage");
 
-const API_URL = "https://script.google.com/macros/s/AKfycbwrybtjyINYEI_FnPnsprexN9rFuL7-CXA5t72EavltA0pxDDUQCXm5KigPa2t3uXnyyw/exec";
+const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
 
 const lessons = {
   "地瓜巴斯克蛋糕": {
     recipeCode: "地瓜",
     recipeTitle: "地瓜巴斯克蛋糕｜課後食譜",
-    recipeImage: "images/sweetpotato-basque-recipe.jpg",
+    recipeImage: "sweetpotato-basque-recipe.jpg",
     recipeAlt: "地瓜巴斯克蛋糕課後食譜"
   },
   "聖誕薑餅屋": {
     recipeCode: "薑餅",
     recipeTitle: "聖誕薑餅屋｜課後食譜",
-    recipeImage: "images/christmas-gingerbread-recipe.jpg",
+    recipeImage: "christmas-gingerbread-recipe.jpg",
     recipeAlt: "聖誕薑餅屋課後食譜"
   },
   "草莓小廚房（草莓瑪芬＋草莓牛奶）": {
     recipeCode: "草莓",
     recipeTitle: "草莓小廚房｜課後食譜",
-    recipeImage: "images/strawberry-recipe.jpg",
+    recipeImage: "strawberry-recipe.jpg",
     recipeAlt: "草莓小廚房課後食譜"
   },
   "蘋果派": {
     recipeCode: "蘋果派",
     recipeTitle: "蘋果派｜課後食譜",
-    recipeImage: "images/apple-pie-recipe.jpg",
+    recipeImage: "apple-pie-recipe.jpg",
     recipeAlt: "蘋果派課後食譜"
   },
   "南瓜司康": {
     recipeCode: "南瓜",
     recipeTitle: "南瓜司康｜課後食譜",
-    recipeImage: "images/pumpkin-scone-recipe.jpg",
+    recipeImage: "pumpkin-scone-recipe.jpg",
     recipeAlt: "南瓜司康課後食譜"
   },
   "鳳梨巴斯克蛋糕": {
     recipeCode: "鳳梨",
     recipeTitle: "鳳梨巴斯克蛋糕｜課後食譜",
-    recipeImage: "images/pineapple-basque-recipe.jpg",
+    recipeImage: "pineapple-basque-recipe.jpg",
     recipeAlt: "鳳梨巴斯克蛋糕課後食譜"
   }
 };
