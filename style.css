@@ -132,6 +132,7 @@ body {
   font-size: 14px;
 }
 
+.lesson-select,
 textarea,
 .unlock-input {
   width: 100%;
@@ -144,16 +145,23 @@ textarea,
   background: rgba(255, 255, 255, 0.9);
   color: var(--text-main);
   outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 textarea {
   resize: vertical;
 }
 
+.lesson-select:focus,
 textarea:focus,
 .unlock-input:focus {
   border-color: var(--accent-deep);
   box-shadow: 0 0 0 4px rgba(217, 200, 182, 0.18);
+}
+
+textarea::placeholder,
+.unlock-input::placeholder {
+  color: #b1a69d;
 }
 
 .submit-btn,
@@ -165,6 +173,7 @@ textarea:focus,
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
 }
 
 .submit-btn {
@@ -178,6 +187,17 @@ textarea:focus,
   min-width: 132px;
   color: #5b4d43;
   background: #efe4d8;
+  box-shadow: 0 8px 18px rgba(191, 166, 140, 0.14);
+}
+
+.submit-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .unlock-section,
@@ -228,12 +248,6 @@ textarea:focus,
   width: 100%;
   border-radius: 14px;
   object-fit: cover;
-}
-
-.preview-date {
-  margin: 0 0 6px;
-  font-size: 13px;
-  color: var(--text-soft);
 }
 
 .hidden {
