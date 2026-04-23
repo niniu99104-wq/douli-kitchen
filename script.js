@@ -8,7 +8,7 @@ const unlockHint = document.getElementById("unlockHint");
 const recipeTitle = document.getElementById("recipeTitle");
 const recipeImage = document.getElementById("recipeImage");
 
-const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
+const API_URL = "https://script.google.com/macros/s/AKfycbwCMnHlehHiGavAJAWPJA0A5yxT1dzQvwajw8-N30eWjwSNGZ60BvVk6RjTk5iRSDe9fg/exec";
 
 const lessons = {
   "地瓜巴斯克蛋糕": {
