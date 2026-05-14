@@ -25,7 +25,7 @@ const submitBtn      = document.getElementById("submitBtn");
 const errorLesson    = document.getElementById("error-lesson");
 
 // ── API ───────────────────────────────────────────────────
-const API_URL = "https://script.google.com/macros/s/AKfycbz_DC5aqEc3QyglAuPZRn3Hek87uQEDbCLugNzAKoL2r1cGAqlLYtTJBp8x5CjAxEDvKg/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwsFHxSg863Rjy7Z8fJqPlTZ4EjmplRzUOFEaavvas9qi-jPsJysq1OajmmasCAqxR0ZA/exec";
 
 /* ============================================================
    課程資料
