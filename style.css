@@ -1,3 +1,8 @@
+/* ============================================================
+   DouNi Kitchen — style.css  (優化版)
+   新增：進度條、錯誤提示、解鎖成功動畫、手機版 unlock-form 修正
+   ============================================================ */
+
 :root {
   --bg: #f7f3ee;
   --card: rgba(255, 252, 248, 0.88);
@@ -6,6 +11,9 @@
   --text-soft: #8a7e74;
   --title: #4f463f;
   --accent-deep: #c7b19b;
+  --accent-light: #e8d9c9;
+  --error: #b85c5c;
+  --success: #7a9e7e;
   --shadow: 0 18px 45px rgba(129, 109, 90, 0.08);
   --radius-xl: 28px;
   --radius-lg: 18px;
@@ -43,6 +51,7 @@ body {
   backdrop-filter: blur(8px);
 }
 
+/* ── Typography ─────────────────────────────────────────── */
 .eyebrow,
 .preview-tag,
 .recipe-tag {
@@ -81,9 +90,34 @@ body {
 }
 
 .intro-last {
-  margin-bottom: 34px;
+  margin-bottom: 28px;
 }
 
+/* ── 進度條 ──────────────────────────────────────────────── */
+.progress-bar-wrap {
+  height: 4px;
+  background: rgba(199, 177, 155, 0.18);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-light), var(--accent-deep));
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.progress-label {
+  margin: 0 0 20px;
+  font-size: 12px;
+  color: var(--text-soft);
+  letter-spacing: 0.05em;
+}
+
+/* ── Form ────────────────────────────────────────────────── */
 .form {
   display: flex;
   flex-direction: column;
@@ -98,6 +132,11 @@ body {
   background: rgba(255, 255, 255, 0.58);
   border: 1px solid rgba(210, 195, 180, 0.28);
   border-radius: var(--radius-lg);
+  transition: box-shadow 0.2s ease;
+}
+
+.question-block:focus-within {
+  box-shadow: 0 4px 18px rgba(199, 177, 155, 0.15);
 }
 
 .question-title {
@@ -114,31 +153,42 @@ body {
   color: var(--text-soft);
 }
 
+/* ── Options ─────────────────────────────────────────────── */
 .option {
   display: flex;
   align-items: flex-start;
   gap: 12px;
   padding: 10px 0;
   cursor: pointer;
+  border-radius: var(--radius-md);
+  transition: background 0.15s ease;
+}
+
+.option:hover {
+  background: rgba(199, 177, 155, 0.08);
 }
 
 .option input {
   margin-top: 5px;
   accent-color: var(--accent-deep);
   flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
 }
 
 .option span {
   font-size: 14px;
 }
 
+/* ── Inputs ──────────────────────────────────────────────── */
 .lesson-select,
 textarea,
 .unlock-input {
   width: 100%;
   border: 1px solid rgba(201, 184, 167, 0.48);
   border-radius: var(--radius-md);
-  padding: 16px;
+  padding: 14px 16px;
   font-family: inherit;
   font-size: 14px;
   line-height: 1.8;
@@ -150,6 +200,7 @@ textarea,
 
 textarea {
   resize: vertical;
+  min-height: 100px;
 }
 
 .lesson-select:focus,
@@ -164,6 +215,18 @@ textarea::placeholder,
   color: #b1a69d;
 }
 
+/* 錯誤狀態 */
+.field-error {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: var(--error);
+}
+
+.lesson-select.is-error {
+  border-color: var(--error);
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
 .submit-btn,
 .secondary-btn {
   border: none;
@@ -190,20 +253,35 @@ textarea::placeholder,
   box-shadow: 0 8px 18px rgba(191, 166, 140, 0.14);
 }
 
-.submit-btn:hover,
-.secondary-btn:hover {
+.submit-btn:hover:not(:disabled),
+.secondary-btn:hover:not(:disabled) {
   transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(191, 166, 140, 0.22);
 }
 
-.submit-btn:disabled {
-  opacity: 0.7;
+.submit-btn:disabled,
+.secondary-btn:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
+/* ── Sections ────────────────────────────────────────────── */
 .unlock-section,
 .recipe-section,
 .preview-section {
   margin-top: 34px;
+}
+
+/* 謝謝徽章 */
+.thank-you-badge {
+  font-size: 32px;
+  margin-bottom: 12px;
+  animation: floatHeart 2.4s ease-in-out infinite;
+}
+
+@keyframes floatHeart {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
 }
 
 .unlock-text,
@@ -225,20 +303,25 @@ textarea::placeholder,
 .unlock-desc {
   margin: 0 0 16px;
   font-size: 14px;
+  line-height: 1.9;
 }
 
+/* ── Unlock form：手機直排，桌機橫排 ─────────────────────── */
 .unlock-form {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  align-items: stretch;
 }
 
 .unlock-hint {
   margin: 12px 0 0;
   font-size: 13px;
   color: #9a8170;
+  min-height: 1.4em; /* 避免版面跳動 */
 }
 
+/* ── Recipe ──────────────────────────────────────────────── */
 .recipe-image-card {
   padding: 14px;
 }
@@ -250,8 +333,77 @@ textarea::placeholder,
   object-fit: cover;
 }
 
+.recipe-note {
+  margin-top: 16px;
+  color: var(--text-soft);
+}
+
+/* ── Preview ─────────────────────────────────────────────── */
+.preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.preview-card p {
+  margin: 0;
+}
+
+.booking-hint {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 12px;
+}
+
+.booking-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 12px 24px;
+  background: var(--accent-light);
+  color: var(--title);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.18s ease;
+}
+
+.booking-link:hover {
+  background: var(--accent-deep);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.partner-text {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+/* ── Submit wrap ─────────────────────────────────────────── */
+.submit-wrap {
+  margin-top: 8px;
+}
+
+/* ── Utilities ───────────────────────────────────────────── */
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (min-width: 480px) {
+  .unlock-form {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .unlock-input {
+    flex: 1;
+  }
+
+  .secondary-btn {
+    flex-shrink: 0;
+  }
 }
 
 @media (min-width: 768px) {
@@ -265,17 +417,4 @@ textarea::placeholder,
   .recipe-image-card {
     padding: 28px 24px;
   }
-
-  .unlock-form {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .unlock-input {
-    flex: 1;
-  }
-}
-
-.intro-teacher {
-  white-space: pre-line;
 }
