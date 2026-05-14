@@ -20,32 +20,28 @@
       <p class="eyebrow">Douli Kitchen</p>
       <h1 class="title">謝謝你們一起來</h1>
 
-      <p class="intro intro-teacher">
-        我是 NiNi，也是一位媽媽。
-      </p>
+      <p class="intro intro-teacher">我是 NiNi，也是一位媽媽。</p>
 
       <p class="intro">
-        很多時候，我也會在「要不要幫忙」之間猶豫。  
+        很多時候，我也會在「要不要幫忙」之間猶豫。<br />
         但慢慢發現，當我退一點點，孩子其實會自己長出很多能力。
       </p>
 
       <p class="intro">
-        所以這些課裡，我沒有想讓孩子做得多完美，  
+        所以這些課裡，我沒有想讓孩子做得多完美，<br />
         只是想陪他們好好摸、好好做、好好感覺。
       </p>
 
-      <p class="intro">
-        也陪你，一起慢慢找到那個剛剛好的距離。
-      </p>
+      <p class="intro">也陪你，一起慢慢找到那個剛剛好的距離。</p>
 
       <p class="intro">
-        那一小段一起做點心的時間，其實很短，  
+        那一小段一起做點心的時間，其實很短，<br />
         但我很喜歡看著孩子慢慢進入狀態的樣子。
       </p>
 
       <p class="intro">
-        有的人一開始不敢碰，  
-        有的人一上手就停不下來，  
+        有的人一開始不敢碰，<br />
+        有的人一上手就停不下來，<br />
         也有那種靜靜看很久，最後突然開始動手的孩子。
       </p>
 
@@ -53,12 +49,20 @@
         如果你願意，想邀請你一起回想一下那一小段美好時間 🤍
       </p>
 
-      <form id="feedbackForm" class="form">
-        <section class="question-block">
+      <!-- 進度指示器 -->
+      <div class="progress-bar-wrap" aria-hidden="true">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <p class="progress-label" id="progressLabel">填寫中 0 / 7</p>
+
+      <form id="feedbackForm" class="form" novalidate>
+
+        <!-- 課程選擇 -->
+        <section class="question-block" id="block-lesson">
           <h2 class="question-title">先告訴我，你們參加的是哪一堂課？</h2>
           <p class="question-subtitle">請先選擇參加的課程</p>
 
-          <select id="lessonSelect" class="lesson-select" required>
+          <select id="lessonSelect" name="lessonName" class="lesson-select" required>
             <option value="">請選擇課程</option>
             <option value="地瓜巴斯克蛋糕">2025 十一月｜地瓜巴斯克蛋糕</option>
             <option value="聖誕薑餅屋">2025 十二月｜聖誕薑餅屋</option>
@@ -67,9 +71,11 @@
             <option value="南瓜司康">2026 三月｜南瓜司康</option>
             <option value="鳳梨巴斯克蛋糕">2026 四月｜鳳梨巴斯克蛋糕</option>
           </select>
+          <p class="field-error hidden" id="error-lesson">請先選擇本次課程</p>
         </section>
 
-        <section class="question-block">
+        <!-- Q1 -->
+        <section class="question-block" data-question="1">
           <h2 class="question-title">Q1. 有沒有哪一個畫面，讓你特別記住？</h2>
           <p class="question-subtitle">可複選</p>
 
@@ -77,84 +83,74 @@
             <input type="checkbox" name="memory" value="孩子第一次把手伸進麵粉或麵糰裡的樣子" />
             <span>孩子第一次把手伸進麵粉／麵糰裡，那種有點猶豫又很專心的樣子</span>
           </label>
-
           <label class="option">
             <input type="checkbox" name="memory" value="發現食材變化時的驚訝表情" />
             <span>發現食材變化的那一刻（顏色、膨脹、質地）露出的驚訝</span>
           </label>
-
           <label class="option">
             <input type="checkbox" name="memory" value="努力自己完成動作的樣子" />
             <span>很努力想自己完成某個動作（切、刷、揉）的樣子</span>
           </label>
-
           <label class="option">
             <input type="checkbox" name="memory" value="裝飾作品時的投入與創意" />
             <span>最後裝飾作品時，那種很投入的小小創意</span>
           </label>
-
           <label class="option">
             <input type="checkbox" name="memory" value="回家路上一直分享今天做了什麼" />
             <span>回家路上，一直在分享「我剛剛做了什麼」</span>
           </label>
         </section>
 
-        <section class="question-block">
+        <!-- Q2 -->
+        <section class="question-block" data-question="2">
           <h2 class="question-title">Q2. 在我一開始說「可以慢一點、可以先不要幫忙」的時候，你的感覺是？</h2>
 
           <label class="option">
             <input type="radio" name="reminder" value="有被提醒到，原來我不用急著幫孩子整理好一切" />
             <span>有被提醒到，原來我不用急著幫孩子整理好一切</span>
           </label>
-
           <label class="option">
             <input type="radio" name="reminder" value="有比較放鬆，沒有那麼擔心弄髒或弄亂" />
             <span>有比較放鬆，沒有那麼擔心弄髒或弄亂</span>
           </label>
-
           <label class="option">
             <input type="radio" name="reminder" value="開始比較願意停下來，看孩子怎麼做" />
             <span>開始比較願意停下來，看孩子怎麼做</span>
           </label>
-
           <label class="option">
             <input type="radio" name="reminder" value="覺得被理解，原來這些焦慮是很正常的" />
             <span>覺得被理解，原來這些焦慮是很正常的</span>
           </label>
         </section>
 
-        <section class="question-block">
-          <h2 class="question-title">
-            Q3. 有沒有哪一個瞬間，你其實很想幫忙，但最後還是讓孩子自己試試看？
-          </h2>
+        <!-- Q3 -->
+        <section class="question-block" data-question="3">
+          <h2 class="question-title">Q3. 有沒有哪一個瞬間，你其實很想幫忙，但最後還是讓孩子自己試試看？</h2>
 
           <label class="option">
             <input type="radio" name="holdingBack" value="有，而且我有慢慢忍住" />
             <span>有，而且我有慢慢忍住</span>
           </label>
-
           <label class="option">
             <input type="radio" name="holdingBack" value="有，但有點忍不住還是幫了一點" />
             <span>有，但有點忍不住還是幫了一點</span>
           </label>
-
           <label class="option">
             <input type="radio" name="holdingBack" value="有注意到自己想幫忙，但還在學習放手" />
             <span>有注意到自己想幫忙，但還在學習放手</span>
           </label>
-
           <label class="option">
             <input type="radio" name="holdingBack" value="沒特別感覺，但好像比平常放鬆一點" />
             <span>沒特別感覺，但好像比平常放鬆一點</span>
           </label>
-
           <label class="option">
             <input type="radio" name="holdingBack" value="老實說還是有點焦慮，但可以理解這樣的過程" />
             <span>老實說還是有點焦慮，但可以理解這樣的過程</span>
           </label>
         </section>
 
-        <section class="question-block">
+        <!-- Q4 -->
+        <section class="question-block" data-question="4">
           <h2 class="question-title">Q4. 如果用你的角度看，你覺得孩子帶走的是什麼？</h2>
           <p class="question-subtitle">可複選</p>
 
@@ -162,89 +158,84 @@
             <input type="checkbox" name="takeaway" value="很真實的觸覺經驗" />
             <span>很真實的觸覺經驗（不是乾淨的成品，而是原本的樣子）</span>
           </label>
-
           <label class="option">
             <input type="checkbox" name="takeaway" value="手部的練習" />
             <span>手部的練習（揉、捏、壓、堆）</span>
           </label>
-
           <label class="option">
             <input type="checkbox" name="takeaway" value="開始認識食物原本長什麼樣子" />
             <span>開始認識「食物原本長什麼樣子」</span>
           </label>
-
           <label class="option">
             <input type="checkbox" name="takeaway" value="那種「這是我做的」的小小成就感" />
             <span>那種「這是我做的」的小小成就感</span>
           </label>
-
           <label class="option">
             <input type="checkbox" name="takeaway" value="和你一起完成一件事的那段時間" />
             <span>和你一起完成一件事的那段時間</span>
           </label>
         </section>
 
-        <section class="question-block">
+        <!-- Q5 -->
+        <section class="question-block" data-question="5">
           <h2 class="question-title">Q5. 如果之後還有機會一起玩，你會偷偷希望我們試試看什麼？</h2>
 
           <label class="option">
             <input type="radio" name="wish" value="有點像小實驗的（會變色、會膨脹的食材）" />
             <span>有點像小實驗的（會變色、會膨脹的食材）</span>
           </label>
-
           <label class="option">
             <input type="radio" name="wish" value="更貼近生活的（從食材到餐桌）" />
             <span>更貼近生活的（從食材到餐桌）</span>
           </label>
-
           <label class="option">
             <input type="radio" name="wish" value="有節日感的（有點儀式感的那種）" />
             <span>有節日感的（有點儀式感的那種）</span>
           </label>
-
           <label class="option">
             <input type="radio" name="wish" value="回家也能簡單一起做的點心" />
             <span>回家也能簡單一起做的點心</span>
           </label>
         </section>
 
-        <section class="question-block">
+        <!-- Q6 -->
+        <section class="question-block" data-question="6">
           <h2 class="question-title">Q6. 這樣的節奏，對你們來說是什麼感覺？</h2>
 
           <label class="option">
             <input type="radio" name="rhythm" value="很剛好，孩子可以慢慢做自己的事" />
             <span>很剛好，孩子可以慢慢做自己的事</span>
           </label>
-
           <label class="option">
             <input type="radio" name="rhythm" value="有互動、有需要幫忙的地方，但不會太忙亂" />
             <span>有互動、有需要幫忙的地方，但不會太忙亂</span>
           </label>
-
           <label class="option">
             <input type="radio" name="rhythm" value="有一點點手忙腳亂，但也是一種體驗～" />
             <span>有一點點手忙腳亂，但也是一種體驗～</span>
           </label>
         </section>
 
-        <section class="question-block">
+        <!-- Q7 -->
+        <section class="question-block" data-question="7">
           <h2 class="question-title">Q7. 如果你想悄悄跟我說一句話</h2>
           <p class="question-subtitle">不一定要很完整，哪怕只是一個小小的感覺也很好 🤍</p>
           <textarea id="message" name="message" rows="6" placeholder="寫給老師的一句話..."></textarea>
         </section>
 
         <div class="submit-wrap">
-          <button type="submit" class="submit-btn">送出回饋</button>
+          <button type="submit" class="submit-btn" id="submitBtn">送出回饋</button>
         </div>
       </form>
 
+      <!-- 送出後：謝謝 + 解鎖區 -->
       <section id="unlockSection" class="unlock-section hidden">
+        <div class="thank-you-badge">🤍</div>
         <h2 class="unlock-title">謝謝你把這些留給我</h2>
 
         <p class="unlock-text">
           每一次看見孩子在課堂裡的樣子，都會讓我更確定自己想繼續把這件事做下去。
         </p>
-
         <p class="unlock-text">
           也謝謝你願意把感受留給我。這些對我來說，真的都很珍貴。
         </p>
@@ -252,7 +243,8 @@
         <div class="unlock-box">
           <p class="unlock-label">小小延續</p>
           <p class="unlock-desc">
-            如果你們願意，也可以把活動中的味道帶回家慢慢延續。輸入課堂的小暗號，就可以解鎖這次的課後食譜。
+            如果你們願意，也可以把活動中的味道帶回家慢慢延續。<br />
+            輸入課堂的小暗號，就可以解鎖這次的課後食譜。
           </p>
 
           <div class="unlock-form">
@@ -261,24 +253,29 @@
               id="recipeCode"
               class="unlock-input"
               placeholder="請輸入今天的小暗號"
+              autocomplete="off"
+              autocorrect="off"
+              spellcheck="false"
             />
             <button type="button" id="unlockBtn" class="secondary-btn">解鎖食譜</button>
           </div>
 
-          <p id="unlockHint" class="unlock-hint"></p>
+          <p id="unlockHint" class="unlock-hint" role="alert"></p>
         </div>
       </section>
 
+      <!-- 食譜區 -->
       <section id="recipeSection" class="recipe-section hidden">
         <p class="recipe-tag">Recipe</p>
         <h2 id="recipeTitle" class="recipe-title">課後食譜</h2>
         <p class="recipe-subtitle">今天的味道，回家也可以慢慢延續。</p>
 
         <div class="recipe-image-card">
+          <!-- 圖片由 JS 動態插入，避免直接在 HTML 暴露所有路徑 -->
           <img
             id="recipeImage"
-            src="strawberry-recipe.jpg"
-            alt="課後食譜"
+            src=""
+            alt=""
             class="recipe-image"
           />
         </div>
@@ -288,12 +285,11 @@
         </p>
       </section>
 
+      <!-- 預告區 -->
       <section class="preview-section">
         <p class="preview-tag">Next Class</p>
         <h2 class="preview-title">課程預告</h2>
-        <p class="preview-text">
-          接下來還有這些季節小課程，歡迎記下來。
-        </p>
+        <p class="preview-text">接下來還有這些季節小課程，歡迎記下來。</p>
 
         <div class="preview-card">
           <p>五月｜蘋果花蛋糕＆母親節小卡</p>
@@ -311,6 +307,7 @@
         <a
           href="https://inline.app/booking/-O_gBA04P-BJarvIkbA1:inline-live-3/-O_gBA6c5ZjzTHuAjztw?language=zh-tw"
           target="_blank"
+          rel="noopener noreferrer"
           class="booking-link"
         >
           查看目前開放場次
@@ -319,11 +316,9 @@
         <p class="partner-text">
           沐光毓有很多很溫柔的活動，不只是食育，也有陪孩子探索、感受生活的各種課程。
         </p>
-
         <p class="partner-text">
           可以在不同地方，都遇到一樣溫柔看待孩子的人，其實是一件很幸福的事 🤍
         </p>
-
         <p class="partner-text">
           如果你們剛好在找適合孩子的空間，也可以慢慢看看他們的安排。
         </p>
