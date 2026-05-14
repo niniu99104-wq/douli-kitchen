@@ -45,6 +45,7 @@ const KNOWN_LESSONS = [
   "蘋果派",
   "南瓜司康",
   "鳳梨巴斯克蛋糕"
+  "蘋果花蛋糕"
 ];
 
 // ── 狀態變數（修正 Bug #1：送出後不再依賴 lessonSelect.value） ──
