@@ -14,7 +14,7 @@ const submitBtn       = document.getElementById("submitBtn");
 const errorLesson     = document.getElementById("error-lesson");
 
 // ── API ───────────────────────────────────────────────────
-const API_URL = "https://script.google.com/macros/s/AKfycbx_C5lJo_b673b0z1C9qBg-vgGjBr3pYn1yoXb5XXTz6Pfzj7EKXWGCdtbUQGUiTnTSlA/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbx72oWlsPlqzOnlVAUpjqLH79a6J7ojw7ZFBBfqT3YyOPXyJQLcHKCOMSRnfPJG7imD/exec";
 
 // ── 狀態變數 ──────────────────────────────────────────────
 let submittedLesson = null;
