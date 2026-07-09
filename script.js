@@ -105,22 +105,35 @@ feedbackForm.addEventListener("submit", async function (event) {
   }
 });
 
-// ── 解鎖食譜 ──────────────────────────────────────────────
+// ── 解鎖食譜（保險升級版） ──────────────────────────────────────────────
 unlockBtn.addEventListener("click", async function () {
-  if (!submittedLesson) {
-    unlockHint.textContent = "請先完成問卷送出喔 🤍";
+  // 保險 1：如果 submittedLesson 還沒被填入，我們直接現場去抓下拉選單的值
+  let currentLesson = submittedLesson || lessonSelect.value;
+
+  if (!currentLesson) {
+    unlockHint.textContent = "請先完成問卷並選擇課程喔 🤍";
     return;
   }
 
   const inputValue = recipeCodeInput.value.trim();
   if (!inputValue) {
     unlockHint.textContent = "請輸入今天的小暗號 🤍";
+    // 這裡加上安全防護：如果只是單純沒打字，絕對不可以觸發 fetch 送出！
     recipeCodeInput.focus();
     return;
   }
 
-  unlockBtn.disabled    = true;
+  // 保險 2：強制校正！如果名字拿到的是長名字，現場幫妳砍成 GAS 要的 "法式鹹派"
+  if (currentLesson.includes("鹹派")) {
+    currentLesson = "法式鹹派";
+  }
+  if (currentLesson.includes("佛卡夏")) {
+    currentLesson = "佛卡夏麵包";
+  }
+
+  unlockBtn.disabled  = true;
   unlockBtn.textContent = "確認中…";
+  unlockHint.textContent = "正在努力解鎖中... ✨";
 
   try {
     const codeHash = await hashStr(inputValue);
@@ -130,7 +143,7 @@ unlockBtn.addEventListener("click", async function () {
       headers: { "Content-Type": "text/plain;charset=utf-8" },
       body:    JSON.stringify({
         action:     "verifyCode",
-        lessonName: submittedLesson,
+        lessonName: currentLesson, // 這裡送出的一定會是乾淨的 "法式鹹派"
         codeHash:   codeHash
       })
     });
@@ -150,7 +163,8 @@ unlockBtn.addEventListener("click", async function () {
       unlockBtn.textContent    = "已解鎖 ✓";
 
     } else {
-      unlockHint.textContent = "暗號好像還差一點點，再想想看 🤍";
+      // 這裡如果失敗，顯示後端到底是拿什麼名稱在比對，方便妳一眼抓漏
+      unlockHint.textContent = `暗號好像還差一點點（對應課程：${currentLetter}），再想想看 🤍`;
       recipeCodeInput.select();
       unlockBtn.disabled    = false;
       unlockBtn.textContent = "解鎖食譜";
